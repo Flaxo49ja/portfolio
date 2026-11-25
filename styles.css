@@ -104,12 +104,6 @@ code {
 
 main { padding-top: 52px; }
 
-.kicker {
-  margin: 0 0 26px;
-  font-size: 15px;
-  color: var(--ink-3);
-}
-
 h1 {
   margin: 0 0 24px;
   font-size: clamp(1.85rem, 4.6vw, 2.5rem);
