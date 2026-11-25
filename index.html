@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anayo Anyafu — Security Research & Detection Engineering</title>
+<title>Anayo Anyafulu — Security Research & Detection Engineering</title>
 <meta name="description" content="Security researcher and detection engineer in Maputo, Mozambique. Measured HTTP security headers across Mozambican websites, built phishing detection, detection engineering and threat-intel tooling.">
-<meta name="author" content="Anayo Chibuike Anyafu">
-<meta property="og:title" content="Anayo Anyafu — Security Research & Detection Engineering">
+<meta name="author" content="Anayo Chibuike Anyafulu">
+<meta property="og:title" content="Anayo Anyafulu — Security Research & Detection Engineering">
 <meta property="og:description" content="I measure what the internet actually deploys. Mozambican websites average 38.2/100 on security headers.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://github.com">
@@ -19,7 +19,7 @@
   <a class="brand" href="#top">
     <span class="mark" aria-hidden="true">AA</span>
     <span class="brand-text">
-      <strong>Anayo Anyafu</strong>
+      <strong>Anayo Anyafulu</strong>
       <em>@Flaxo49ja</em>
     </span>
   </a>
@@ -42,14 +42,14 @@
 
   <section class="hero" id="top">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Maputo, Mozambique · working remotely</p>
+      <p class="eyebrow">Maputo, Mozambique · working remotely</p>
 
       <h1>I measure what the<br>internet <span class="accent">actually</span> deploys.</h1>
 
       <p class="lede">
-        Security researcher and detection engineer. I scan real infrastructure in regions
-        nobody has measured, build the tooling around what I find, and publish the limits
-        of every result.
+        Security researcher and detection engineer. Most of my work starts with a scan:
+        pick a region nobody has measured, count what is really deployed, then build the
+        tool that keeps counting. Whatever the numbers cannot show goes in the write-up.
       </p>
 
       <div class="actions">
@@ -60,13 +60,13 @@
 
     <aside class="panel" aria-labelledby="panel-title">
       <div class="panel-head">
-        <span id="panel-title">header audit / 2026 scan</span>
-        <span class="live"><i aria-hidden="true"></i>66 sites reachable</span>
+        <span id="panel-title">http header audit · 2026 scan</span>
+        <span class="live"><i aria-hidden="true"></i>66 reachable</span>
       </div>
 
       <div class="panel-score">
         <div class="score-num">47<span>/100</span></div>
-        <p class="score-label">mean HTTP security header score</p>
+        <p class="score-label">mean score, all 66 reachable sites</p>
       </div>
 
       <div class="compare" role="img" aria-label="Mozambican sites scored 38.2 out of 100 on average, against 52.7 for the global comparison set.">
@@ -98,50 +98,47 @@
   </section>
 
   <section class="metrics" aria-label="Key numbers">
-    <div class="metric reveal">
-      <span class="metric-index">01</span>
+    <div class="metric">
       <strong>47<span>/100</span></strong>
-      <p>Mean header score across 66 reachable sites</p>
+      <p>Mean header score, 66 reachable sites</p>
     </div>
-    <div class="metric reveal">
-      <span class="metric-index">02</span>
+    <div class="metric">
       <strong>68.2<span>%</span></strong>
       <p>Missing two or more of the six recommended headers</p>
     </div>
-    <div class="metric reveal">
-      <span class="metric-index">03</span>
+    <div class="metric">
       <strong>42<span>/68</span></strong>
       <p>Mozambican sites unreachable at scan time</p>
     </div>
-    <div class="metric reveal">
-      <span class="metric-index">04</span>
+    <div class="metric">
       <strong>107,355</strong>
       <p>URLs behind the PhishGuard model</p>
     </div>
   </section>
 
   <section class="section" id="research">
-    <div class="section-head reveal">
-      <p class="label">01 / research</p>
-      <h2>The finding the sector did not have.</h2>
+    <div class="section-head">
+      <p class="label">Research</p>
+      <h2>I scanned about a hundred websites. Forty-two of them never answered.</h2>
       <p class="section-lede">
-        Published for Research Methodology (RM_2026-ii) at Universidade São Tomás de Moçambique,
-        and left open so anyone can re-run it against their own country.
+        Written for Research Methodology (RM_2026-ii) at Universidade São Tomás de Moçambique.
+        The scanner and the dataset are public, so it can be pointed at another country.
       </p>
     </div>
 
     <div class="research-grid">
-      <article class="research-main reveal">
+      <article class="research-main">
         <h3>Automated analysis of HTTP security header implementation across Mozambican and global websites</h3>
         <p>
-          Roughly one hundred sites across government, financial, educational and commercial
-          sectors, one HTTPS GET each, six headers scored correct, weak or missing, with
-          chi-square tests across categories.
+          Around a hundred sites from government, banking, education and commerce. One HTTPS
+          GET each. Six headers scored correct, weak or missing, then chi-square tests across
+          the categories.
         </p>
         <p>
-          The headline is not that deployments are weak. It is that <strong>42 of 68 Mozambican
-          sites could not be reached at all</strong> — dead DNS, broken TLS certificates, timeouts.
-          A site that cannot complete a handshake cannot protect anyone, and nobody had counted it.
+          The headline is reachability rather than weakness:
+          <strong>42 of 68 Mozambican sites never completed a handshake</strong>. Dead DNS,
+          expired certificates, timeouts. A site that cannot answer cannot be scored, so most
+          of these were being left out of the conversation entirely.
         </p>
         <div class="chips">
           <span>Python</span><span>Chi-square</span><span>6 headers</span><span>Reproducible pipeline</span>
@@ -150,15 +147,15 @@
       </article>
 
       <div class="research-side">
-        <div class="mini reveal">
+        <div class="mini">
           <strong>38.2</strong>
           <p>Mozambican mean, against 52.7 for the global set</p>
         </div>
-        <div class="mini reveal">
+        <div class="mini">
           <strong>68.2%</strong>
           <p>Missing at least two of six recommended headers</p>
         </div>
-        <div class="mini reveal">
+        <div class="mini">
           <strong>66</strong>
           <p>Sites reachable at scan time, from roughly 100 sampled</p>
         </div>
@@ -167,90 +164,82 @@
   </section>
 
   <section class="section" id="work">
-    <div class="section-head reveal">
-      <p class="label">02 / selected work</p>
-      <h2>Built to be checked, not admired.</h2>
-    </div>
-
-    <div class="filters reveal" role="group" aria-label="Filter projects">
-      <button type="button" class="filter is-active" data-filter="all">All</button>
-      <button type="button" class="filter" data-filter="research">Research</button>
-      <button type="button" class="filter" data-filter="ml">Machine learning</button>
-      <button type="button" class="filter" data-filter="detection">Detection</button>
-      <button type="button" class="filter" data-filter="tooling">Tooling</button>
-      <button type="button" class="filter" data-filter="docs">Docs</button>
+    <div class="section-head">
+      <p class="label">Work</p>
+      <h2>Projects</h2>
+      <p class="section-lede">All public. Every one of them carries the code and the numbers it produced.</p>
     </div>
 
     <div class="cards">
 
-      <article class="card reveal" data-tags="research">
+      <article class="card">
         <div class="card-top">
           <span class="tag">Research</span>
           <span class="meta">2026 · Python</span>
         </div>
         <h3>header-study</h3>
-        <p class="problem">Nobody had measured how Mozambican websites implement HTTP security headers, so the gap was discussed only anecdotally.</p>
-        <p class="solution">Scans and scores six headers across regional and global sites, with unreachable hosts recorded as a finding rather than discarded.</p>
+        <p class="problem">Header deployment in Mozambique was discussed anecdotally. Nobody had counted it.</p>
+        <p class="solution">Scans and scores six headers across regional and global sites. Unreachable hosts are recorded as a result instead of being dropped from the sample.</p>
         <div class="chips"><span>httpx</span><span>Chi-square</span><span>CSV pipeline</span></div>
         <a class="link" href="https://github.com/Flaxo49ja/header-study" target="_blank" rel="noopener">View source <span aria-hidden="true">↗</span></a>
       </article>
 
-      <article class="card reveal" data-tags="ml">
+      <article class="card">
         <div class="card-top">
           <span class="tag">Machine learning</span>
           <span class="meta">2026 · Python / TypeScript</span>
         </div>
         <h3>PhishGuard</h3>
-        <p class="problem">Phishing checkers send the URL you are about to trust to somebody else's server, which is the last thing a suspicious link should touch.</p>
-        <p class="solution">A logistic regression over 18 lexical features, trained on 107,355 real URLs, exported to a 2 KB file and run in the browser so the URL never leaves the page.</p>
+        <p class="problem">Every phishing checker sends the URL you are about to trust to somebody else's server. A suspicious link is the last thing that should touch another machine.</p>
+        <p class="solution">Logistic regression over 18 features of the URL string, trained on 107,355 real URLs, exported to a 2 KB file and run in the page. The URL never leaves the browser.</p>
         <div class="chips"><span>107,355 URLs</span><span>ROC-AUC 0.954</span><span>Occlusion explanations</span></div>
         <a class="link" href="https://github.com/Flaxo49ja/phishguard" target="_blank" rel="noopener">View source <span aria-hidden="true">↗</span></a>
       </article>
 
-      <article class="card reveal" data-tags="detection">
+      <article class="card">
         <div class="card-top">
           <span class="tag">Detection</span>
           <span class="meta">2026 · Python</span>
         </div>
         <h3>nightshift</h3>
-        <p class="problem">SOC practice projects teach you to install a SIEM, then never tell you whether your rules actually catch anything.</p>
-        <p class="solution">A single-machine range that collects real journald and auditd telemetry, injects safe loopback-only techniques with ground truth recorded first, and scores detections against it.</p>
+        <p class="problem">SOC practice ranges teach you to install a SIEM. They rarely tell you whether your rules caught anything.</p>
+        <p class="solution">Collects journald and auditd telemetry from one host, injects loopback-only techniques with the ground truth saved first, then scores the rules against it.</p>
         <div class="chips"><span>ATT&amp;CK mapped</span><span>177 tests</span><span>100% recall · 33% precision</span></div>
         <a class="link" href="https://github.com/Flaxo49ja/nightshift" target="_blank" rel="noopener">View source <span aria-hidden="true">↗</span></a>
       </article>
 
-      <article class="card reveal" data-tags="tooling">
+      <article class="card">
         <div class="card-top">
           <span class="tag">Tooling</span>
           <span class="meta">2026 · Python</span>
         </div>
         <h3>ioc-triage</h3>
-        <p class="problem">Analysts check an indicator across five tabs and then guess, which is slow and impossible to defend later.</p>
-        <p class="solution">Queries five free sources concurrently into one deterministic, weighted verdict with scriptable exit codes and a cache that protects free-tier quota.</p>
+        <p class="problem">Checking an indicator across five tabs is slow, and the reasoning is usually gone by the time the ticket gets written.</p>
+        <p class="solution">Queries five free sources at once and returns one weighted verdict, with exit codes you can script and a cache that keeps the free tiers alive.</p>
         <div class="chips"><span>5 sources</span><span>Deterministic</span><span>24 h SQLite cache</span></div>
         <a class="link" href="https://github.com/Flaxo49ja/ioc-triage" target="_blank" rel="noopener">View source <span aria-hidden="true">↗</span></a>
       </article>
 
-      <article class="card reveal" data-tags="tooling">
+      <article class="card">
         <div class="card-top">
           <span class="tag">Tooling</span>
           <span class="meta">2026 · TypeScript / Python</span>
         </div>
         <h3>mz-threat-feed</h3>
-        <p class="problem">Threat feeds list indicators, but not which of them sit on infrastructure registered to your own region.</p>
-        <p class="solution">Cross-references recent IOCs against ASN prefixes verified in RIPEStat for Mozambique and SADC, then publishes a daily dashboard through GitHub Actions.</p>
+        <p class="problem">Threat feeds list indicators. They do not say which of them sit on address space registered to your own region.</p>
+        <p class="solution">Cross-references recent IOCs against SADC prefixes verified in RIPEStat, then publishes a dashboard every day from GitHub Actions.</p>
         <div class="chips"><span>RIPEStat</span><span>URLhaus</span><span>GitHub Actions</span></div>
         <a class="link" href="https://github.com/Flaxo49ja/mz-threat-feed" target="_blank" rel="noopener">View source <span aria-hidden="true">↗</span></a>
       </article>
 
-      <article class="card reveal" data-tags="docs">
+      <article class="card">
         <div class="card-top">
           <span class="tag">Docs</span>
           <span class="meta">2026 · HTML</span>
         </div>
         <h3>secbasics</h3>
-        <p class="problem">Most security advice is written for people who already work in security, which leaves everyone else with the risk.</p>
-        <p class="solution">Plain-language guides on home labs, VPNs, everyday tools and privacy basics, written for readers who have never opened a terminal.</p>
+        <p class="problem">Most security writing assumes the reader already works in security.</p>
+        <p class="solution">Plain-language guides on home labs, VPNs, everyday tools and privacy, written for people who have never opened a terminal.</p>
         <div class="chips"><span>Static site</span><span>Portuguese context</span><span>No jargon</span></div>
         <a class="link" href="https://github.com/Flaxo49ja/secbasics" target="_blank" rel="noopener">View source <span aria-hidden="true">↗</span></a>
       </article>
@@ -259,35 +248,31 @@
   </section>
 
   <section class="section" id="approach">
-    <div class="section-head reveal">
-      <p class="label">03 / approach</p>
-      <h2>Four habits the work is built on.</h2>
+    <div class="section-head">
+      <p class="label">Approach</p>
+      <h2>How I work</h2>
     </div>
 
     <div class="approach">
-      <div class="layer reveal">
-        <span class="layer-no">01</span>
+      <div class="layer">
         <h3>Measure before arguing</h3>
-        <p>Every claim starts as a scan, a count or a score. If something cannot be measured, it gets labelled as unmeasured instead of assumed.</p>
+        <p>A claim starts as a scan, a count or a score. If something cannot be measured it gets labelled unmeasured rather than guessed at.</p>
       </div>
-      <div class="layer reveal">
-        <span class="layer-no">02</span>
+      <div class="layer">
         <h3>Score detections against truth</h3>
         <p>Simulations are injected with ground truth written before anything reads them, so precision and recall are evidence rather than opinion.</p>
       </div>
-      <div class="layer reveal">
-        <span class="layer-no">03</span>
+      <div class="layer">
         <h3>Publish the limits</h3>
         <p>Unreachable hosts stay in the report. One host is one vantage point. <code>sudo -n</code> writes nothing to the journal. The boundary is part of the result.</p>
       </div>
-      <div class="layer reveal">
-        <span class="layer-no">04</span>
+      <div class="layer">
         <h3>Defensive by default</h3>
         <p>Injection targets loopback only, scans hit public endpoints once, and no repository attacks a system I do not own.</p>
       </div>
     </div>
 
-    <div class="stack reveal">
+    <div class="stack">
       <p class="label">Working stack</p>
       <div class="chips large">
         <span>Python</span><span>TypeScript</span><span>Rust</span><span>Shell</span>
@@ -299,34 +284,34 @@
   </section>
 
   <section class="section" id="path">
-    <div class="section-head reveal">
-      <p class="label">04 / path</p>
-      <h2>How the work accumulated.</h2>
+    <div class="section-head">
+      <p class="label">Path</p>
+      <h2>How I got here</h2>
     </div>
 
     <ol class="timeline">
-      <li class="reveal">
+      <li>
         <span class="when">2026</span>
         <div>
           <h3>Research methodology, USTM</h3>
           <p>Built the header study for RM_2026-ii, including the sampling method, scoring rubric and hypothesis tests.</p>
         </div>
       </li>
-      <li class="reveal">
+      <li>
         <span class="when">Aug – Sep 2026</span>
         <div>
           <h3>Published the research and the phishing model</h3>
           <p>header-study and PhishGuard went public, both with reproducible pipelines and offline test suites.</p>
         </div>
       </li>
-      <li class="reveal">
+      <li>
         <span class="when">Oct 2026</span>
         <div>
           <h3>Turned the method into tooling</h3>
           <p>ioc-triage for indicator work, then nightshift to make detection quality measurable instead of assumed.</p>
         </div>
       </li>
-      <li class="reveal">
+      <li>
         <span class="when">Nov 2026</span>
         <div>
           <h3>Applied it to the region</h3>
@@ -337,11 +322,11 @@
   </section>
 
   <section class="contact" id="contact">
-    <p class="label">05 / contact</p>
-    <h2>Open to security engineering, detection engineering and research collaboration.</h2>
+    <p class="label">Contact</p>
+    <h2>Open to security engineering, detection engineering and research work.</h2>
     <p class="contact-lede">
-      Based in Maputo, working remotely. If you need someone who will measure the problem
-      before proposing the fix, that is the work I want.
+      I am in Maputo and work remotely. I would rather spend a week measuring a problem
+      than a month guessing at the fix.
     </p>
     <div class="actions">
       <a class="btn primary" href="mailto:chibuikeanyafulu@gmail.com">chibuikeanyafulu@gmail.com <span aria-hidden="true">↗</span></a>
@@ -356,7 +341,7 @@
   <div class="footer-left">
     <span class="mark small" aria-hidden="true">AA</span>
     <div>
-      <strong>Anayo Chibuike Anyafu</strong>
+      <strong>Anayo Chibuike Anyafulu</strong>
       <span>Security research &amp; detection engineering · Maputo</span>
     </div>
   </div>
