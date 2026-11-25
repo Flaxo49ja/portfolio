@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anayo Anyafulu — security research and detection engineering</title>
-<meta name="description" content="Security researcher and detection engineer in Maputo, Mozambique. Measured HTTP security headers across Mozambican websites, built phishing detection, detection engineering and threat-intel tooling.">
+<title>Anayo Anyafulu — detection and security engineering</title>
+<meta name="description" content="Detection and security engineer in Maputo, Mozambique. Builds detection ranges that score rules against ground truth, phishing models that run in the browser, and measurement studies of regional infrastructure.">
 <meta name="author" content="Anayo Chibuike Anyafulu">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#faf8f3">
 <link rel="canonical" href="https://flaxo49ja.github.io/portfolio/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Anayo Anyafulu — security research and detection engineering">
+<meta property="og:title" content="Anayo Anyafulu — detection and security engineering">
 <meta property="og:description" content="I measure what is actually deployed. Mozambican websites average 38.2/100 on security headers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://flaxo49ja.github.io/portfolio/">
@@ -28,10 +28,11 @@
   <div class="wrap masthead-inner">
     <a class="who" href="#top">Anayo Anyafulu</a>
     <nav aria-label="Sections">
+      <a href="#work">Work</a>
       <a href="#research">Research</a>
-      <a href="#work">Projects</a>
       <a href="#approach">Method</a>
       <a href="#path">Path</a>
+      <a href="cv.html">CV</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -39,76 +40,95 @@
 
 <main class="wrap" id="main">
 
-  <h1>Most of my work starts with a scan and ends with a number I can defend.</h1>
+  <h1>Detection tools, and the number that says whether they work.</h1>
 
   <div class="intro">
-    <p>I pick a region or a dataset nobody has measured, count what is actually deployed, then build the tool that keeps counting. The write-up includes the parts that did not work.</p>
-    <p>The most recent one is a study of HTTP security headers across roughly a hundred websites, written for Research Methodology (RM_2026-ii) at Universidade São Tomás de Moçambique. <a href="https://github.com/Flaxo49ja/header-study" target="_blank" rel="noopener">Method and results</a>, or the scanner itself.</p>
+    <p>I am applying for detection engineering and security engineering roles. Everything below is built the same way: instrument the thing, measure it against ground truth, publish the number even when it is unflattering.</p>
+    <p>Two projects carry that furthest. <strong>nightshift</strong> scores detection rules against attacks injected on one machine with the truth written first. <strong>PhishGuard</strong> decides whether a URL is phishing without sending it anywhere. The research piece further down is a header study of 68 Mozambican sites.</p>
   </div>
 
-  <figure class="figure">
-    <table>
-      <caption>Header score, six headers scored correct / weak / missing. 68 Mozambican sites sampled, 40 international ones for comparison; 42 of the 68 never completed a handshake, so 66 sites were scored.</caption>
-      <thead>
-        <tr>
-          <th scope="col">Group</th>
-          <th scope="col" class="num">Mean score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><th scope="row">Mozambique</th><td class="num">38.2</td></tr>
-        <tr><th scope="row">Global comparison</th><td class="num">52.7</td></tr>
-        <tr><th scope="row">All reachable sites</th><td class="num">47.0</td></tr>
-      </tbody>
-    </table>
-    <figcaption>68.2% of sites were missing two or more of the six headers. Unreachable hosts are recorded as a result, not dropped from the sample — a site that cannot answer cannot be scored, and it was being left out of the conversation entirely.</figcaption>
-  </figure>
-
-  <section class="section" id="research">
-    <h2>The header study</h2>
-    <p>Around a hundred sites from government, banking, education and commerce, one HTTPS GET each. Six headers scored correct, weak or missing, then chi-square tests across the categories. The headline turned out to be reachability rather than weakness: 42 of 68 Mozambican sites never completed a handshake. Dead DNS, expired certificates, timeouts.</p>
-    <p>The study is written up as <em>Automated analysis of HTTP security header implementation across Mozambican and global websites</em>, and the scanner is public so it can be pointed at another country. <a href="https://github.com/Flaxo49ja/header-study" target="_blank" rel="noopener">github.com/Flaxo49ja/header-study</a></p>
-  </section>
-
   <section class="section" id="work">
-    <h2>Projects</h2>
-    <p class="section-note">All public, all with the code and the numbers it produced.</p>
+    <h2>Selected work</h2>
 
-    <div class="entry">
-      <p class="where">Python · 2026 · <a href="https://github.com/Flaxo49ja/header-study" target="_blank" rel="noopener">github.com/Flaxo49ja/header-study</a></p>
-      <h3>header-study</h3>
-      <p>Header deployment in Mozambique was discussed anecdotally and never counted. Scans and scores six headers across regional and global sites, keeping unreachable hosts in the sample. httpx, chi-square tests, a CSV pipeline that reruns end to end.</p>
-    </div>
-
-    <div class="entry">
-      <p class="where">Python, TypeScript · 2026 · <a href="https://github.com/Flaxo49ja/phishguard" target="_blank" rel="noopener">github.com/Flaxo49ja/phishguard</a></p>
-      <h3>PhishGuard</h3>
-      <p>Every other phishing checker uploads the URL you are about to trust to somebody else’s server. Logistic regression over 18 features of the URL string, trained on 107,355 URLs, exported to a 2 KB file and run inside the page, with occlusion explanations. ROC-AUC 0.954.</p>
-    </div>
-
-    <div class="entry">
+    <article class="entry">
       <p class="where">Python · 2026 · <a href="https://github.com/Flaxo49ja/nightshift" target="_blank" rel="noopener">github.com/Flaxo49ja/nightshift</a></p>
       <h3>nightshift</h3>
-      <p>Practice ranges teach you to install a SIEM and never tell you whether your rules caught anything. Collects journald and auditd telemetry from one host, injects loopback-only techniques with the ground truth saved first, then scores the rules against it. 177 tests, 100% recall, 33% precision.</p>
-    </div>
+      <p>Most detection practice teaches you to install a SIEM and never tells you whether your rules caught anything. This is a single-machine range: it collects journald and auditd telemetry, injects safe loopback-only techniques with the ground truth saved before anything reads it, then scores your rules against that truth.</p>
+      <figure class="shot">
+        <pre tabindex="0" role="region" aria-label="nightshift score output">nightshift score — provider journald
 
-    <div class="entry">
+TECH      VISIBILITY     INJECTED  CAUGHT  MISSED
+T1046     no-telemetry          0       0       0   not scored: no telemetry
+T1053.006 observed              1       1       0
+T1105     no-telemetry          0       0       0   not scored: no telemetry
+T1548.003 observed              0       0       0   not scored: nothing observed
+
+recall     100%  (1 caught, 0 missed, 1 scored technique(s))
+precision  33%  (2 false positive(s))</pre>
+        <figcaption>Real output from one run. Techniques the collector cannot see are reported as no telemetry and kept out of the recall arithmetic, so a blind spot never reads as a miss.</figcaption>
+      </figure>
+      <p class="takeaway"><span>What it taught me.</span> Perfect recall is cheap: the two false positives were <code>systemd-run</code> probes from earlier in the session that lined up with no injection at all. Precision here measures how tightly a rule is scoped in time and technique, not how clever the rule is — so the fix is window discipline, not more rules.</p>
+    </article>
+
+    <article class="entry">
+      <p class="where">Python for training, TypeScript for the page · 2026 · <a href="https://github.com/Flaxo49ja/phishguard" target="_blank" rel="noopener">github.com/Flaxo49ja/phishguard</a></p>
+      <h3>PhishGuard</h3>
+      <p>Every other phishing checker uploads the URL you are about to trust to somebody else's server before judging it. This one is logistic regression over 18 features of the URL string, trained on 107,355 URLs, exported to a 2 KB file and run inside the page — no request leaves the browser.</p>
+      <figure class="shot">
+        <img src="shots/phishguard.png" width="947" height="775" loading="lazy" alt="PhishGuard scoring a lookalike Microsoft login URL at 77% phishing, with a bar for each feature showing how much it pushed the verdict.">
+        <figcaption>A lookalike login URL at 77% phishing, with the occlusion explanation for each feature. The model file is 2 KB and scores in the page.</figcaption>
+      </figure>
+      <p class="takeaway"><span>What it taught me.</span> ROC-AUC 0.954 is easy to quote and says nothing about the URLs that matter here: the training set is global and English-heavy, so Portuguese-language lures and Mozambican brand names are exactly the case it has seen least.</p>
+    </article>
+
+    <article class="entry">
+      <p class="where">TypeScript for the dashboard, Python for the pipeline · 2026 · <a href="https://flaxo49ja.github.io/mz-threat-feed/" target="_blank" rel="noopener">live dashboard</a> · <a href="https://github.com/Flaxo49ja/mz-threat-feed" target="_blank" rel="noopener">github.com/Flaxo49ja/mz-threat-feed</a></p>
+      <h3>mz-threat-feed</h3>
+      <p>Threat feeds list indicators and never say which of them sit on address space registered to your own region. This pipeline checks recent IOCs against SADC prefixes verified in RIPEStat, triages regional security news for small IT teams, and publishes both from GitHub Actions every day.</p>
+      <figure class="shot">
+        <img src="shots/mz-threat-feed.png" width="1440" height="790" loading="lazy" alt="The MZ Threat Feed dashboard front page: 5,400 indicators checked, 4,055 prefixes watched, 103 overlaps found, 18 of 75 news items kept.">
+        <figcaption>One pipeline run, rendered from the JSON in the repository rather than typed by hand.</figcaption>
+      </figure>
+      <p class="takeaway"><span>What it taught me.</span> Region is the missing column: 103 of 5,400 indicators resolved into SADC space, and no feed marks that — you only find out if you resolve the prefixes yourself.</p>
+    </article>
+
+    <article class="entry">
       <p class="where">Python · 2026 · <a href="https://github.com/Flaxo49ja/ioc-triage" target="_blank" rel="noopener">github.com/Flaxo49ja/ioc-triage</a></p>
       <h3>ioc-triage</h3>
       <p>Checking one indicator across five tabs is slow, and the reasoning is usually gone by the time the ticket gets written. Queries five free sources at once, returns one weighted verdict, with exit codes you can script and a 24-hour SQLite cache that keeps the free tiers alive.</p>
-    </div>
+    </article>
 
-    <div class="entry">
-      <p class="where">TypeScript, Python · 2026 · <a href="https://github.com/Flaxo49ja/mz-threat-feed" target="_blank" rel="noopener">github.com/Flaxo49ja/mz-threat-feed</a></p>
-      <h3>mz-threat-feed</h3>
-      <p>Threat feeds list indicators and never say which of them sit on address space registered to your own region. Cross-references recent IOCs against SADC prefixes verified in RIPEStat, then publishes a dashboard from GitHub Actions every day.</p>
-    </div>
-
-    <div class="entry">
+    <article class="entry">
       <p class="where">HTML · 2026 · <a href="https://github.com/Flaxo49ja/secbasics" target="_blank" rel="noopener">github.com/Flaxo49ja/secbasics</a></p>
       <h3>secbasics</h3>
       <p>Most security writing assumes the reader already works in security. Plain-language guides on home labs, VPNs, everyday tools and privacy, written for people who have never opened a terminal. A static site, in Portuguese, without jargon.</p>
-    </div>
+    </article>
+  </section>
+
+  <section class="section" id="research">
+    <h2>The header study</h2>
+    <p>Around a hundred sites from government, banking, education and commerce, one HTTPS GET each, six headers scored correct, weak or missing, then chi-square tests across the categories. Written for Research Methodology (RM_2026-ii) at Universidade São Tomás de Moçambique.</p>
+
+    <figure class="figure">
+      <table>
+        <caption>Header score, six headers scored correct / weak / missing. 68 Mozambican sites sampled, 40 international ones for comparison; 42 of the 68 never completed a handshake, so 66 sites were scored.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Group</th>
+            <th scope="col" class="num">Mean score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Mozambique</th><td class="num">38.2</td></tr>
+          <tr><th scope="row">Global comparison</th><td class="num">52.7</td></tr>
+          <tr><th scope="row">All reachable sites</th><td class="num">47.0</td></tr>
+        </tbody>
+      </table>
+      <figcaption>68.2% of sites were missing two or more of the six headers. Unreachable hosts are recorded as a result, not dropped from the sample — a site that cannot answer cannot be scored, and it was being left out of the conversation entirely.</figcaption>
+    </figure>
+
+    <p class="takeaway"><span>What it taught me.</span> The headline was reachability, not configuration: 42 of 68 Mozambican sites never completed a handshake at all — dead DNS, expired certificates, timeouts. Header hygiene is a second-order problem if the site does not answer.</p>
+    <p>The study is written up as <em>Automated analysis of HTTP security header implementation across Mozambican and global websites</em>, and the scanner is public so it can be pointed at another country. <a href="https://github.com/Flaxo49ja/header-study" target="_blank" rel="noopener">github.com/Flaxo49ja/header-study</a></p>
   </section>
 
   <section class="section" id="approach">
@@ -153,9 +173,10 @@
   </section>
 
   <section class="section" id="contact">
-    <h2>Contact</h2>
-    <p>Open to security engineering, detection engineering and research work. I am in Maputo and work remotely, and I would rather spend a week measuring a problem than a month guessing at the fix.</p>
-    <p><a href="mailto:chibuikeanyafulu@gmail.com">chibuikeanyafulu@gmail.com</a> · <a href="https://github.com/Flaxo49ja" target="_blank" rel="noopener">github.com/Flaxo49ja</a> · <a href="https://github.com/Flaxo49ja?tab=repositories" target="_blank" rel="noopener">all repositories</a></p>
+    <h2>Hiring me</h2>
+    <p>Open to detection engineering, security engineering and research roles. In Maputo, working remotely, and I would rather spend a week measuring a problem than a month guessing at the fix.</p>
+    <p class="contact-links"><a href="mailto:chibuikeanyafulu@gmail.com">chibuikeanyafulu@gmail.com</a></p>
+    <p class="contact-meta"><a href="cv.html">CV</a> · <a href="https://github.com/Flaxo49ja" target="_blank" rel="noopener">github.com/Flaxo49ja</a> · <a href="https://github.com/Flaxo49ja?tab=repositories" target="_blank" rel="noopener">all repositories</a></p>
   </section>
 
 </main>

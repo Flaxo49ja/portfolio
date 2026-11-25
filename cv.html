@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anayo Chibuike Anyafulu — CV</title>
+<meta name="description" content="CV: detection and security engineering, Maputo, Mozambique.">
+<meta name="author" content="Anayo Chibuike Anyafulu">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#faf8f3">
+<link rel="canonical" href="https://flaxo49ja.github.io/portfolio/cv.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main class="cv">
+
+  <p class="cv-back"><a href="index.html">← Anayo Anyafulu</a></p>
+
+  <header class="cv-head">
+    <h1>Anayo Chibuike Anyafulu</h1>
+    <p class="cv-role">Detection engineering · security engineering · security research</p>
+    <p class="cv-links">
+      <a href="mailto:chibuikeanyafulu@gmail.com">chibuikeanyafulu@gmail.com</a> ·
+      <a href="https://github.com/Flaxo49ja">github.com/Flaxo49ja</a> ·
+      Maputo, Mozambique (remote)
+    </p>
+  </header>
+
+  <section>
+    <h2>Profile</h2>
+    <p>Security engineer who builds the measurement rig before the detector. Work to date: a single-machine detection range that scores rules against ground truth, a phishing model that runs entirely in the browser, an indicator-triage CLI, a regional threat feed, and a published study of HTTP security headers across 68 Mozambican sites.</p>
+  </section>
+
+  <section>
+    <h2>Selected work</h2>
+
+    <div class="cv-item">
+      <h3>nightshift — detection range with ground truth</h3>
+      <p class="meta">Python · <a href="https://github.com/Flaxo49ja/nightshift">github.com/Flaxo49ja/nightshift</a></p>
+      <p>Collects journald and auditd telemetry from one host, applies JSON detection rules, injects safe loopback-only techniques with the ground truth written first, then scores recall and precision against it. Reports techniques the collector cannot see as no telemetry, so a blind spot never reads as a miss. 177 tests, no network, no system changes. One run: 100% recall, 33% precision — the false positives were untargeted probes, which is what the number is for.</p>
+    </div>
+
+    <div class="cv-item">
+      <h3>PhishGuard — phishing detection in the browser</h3>
+      <p class="meta">Python, TypeScript · <a href="https://github.com/Flaxo49ja/phishguard">github.com/Flaxo49ja/phishguard</a></p>
+      <p>Logistic regression over 18 lexical features of a URL, trained on 107,355 URLs and exported to a 2 KB model that scores inside the page with no network call, so the URL being judged is never uploaded. Per-feature occlusion explanations, ROC-AUC 0.954.</p>
+    </div>
+
+    <div class="cv-item">
+      <h3>mz-threat-feed — regional threat intelligence</h3>
+      <p class="meta">TypeScript, Python · <a href="https://flaxo49ja.github.io/mz-threat-feed/">live dashboard</a> · <a href="https://github.com/Flaxo49ja/mz-threat-feed">github.com/Flaxo49ja/mz-threat-feed</a></p>
+      <p>Daily pipeline that deduplicates IOCs from URLhaus and AbuseIPDB, resolves them against 4,055 prefixes across 16 SADC countries taken from RIPEStat, and triages regional security news. Publishes a static dashboard from GitHub Actions; one run checked 5,400 indicators and found 103 on SADC-registered address space.</p>
+    </div>
+
+    <div class="cv-item">
+      <h3>ioc-triage — one verdict per indicator</h3>
+      <p class="meta">Python · <a href="https://github.com/Flaxo49ja/ioc-triage">github.com/Flaxo49ja/ioc-triage</a></p>
+      <p>Queries five free intelligence sources in parallel and returns one weighted verdict with scriptable exit codes and a 24-hour SQLite cache that stays inside the free tiers.</p>
+    </div>
+
+    <div class="cv-item">
+      <h3>secbasics — security writing for non-technical readers</h3>
+      <p class="meta">HTML · <a href="https://github.com/Flaxo49ja/secbasics">github.com/Flaxo49ja/secbasics</a></p>
+      <p>Plain-language guides on home labs, VPNs and privacy in Portuguese, for readers who have never opened a terminal.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Research</h2>
+    <div class="cv-item">
+      <h3>Automated analysis of HTTP security header implementation across Mozambican and global websites</h3>
+      <p class="meta">Research Methodology (RM_2026-ii), Universidade São Tomás de Moçambique · 2026 · <a href="https://github.com/Flaxo49ja/header-study">github.com/Flaxo49ja/header-study</a></p>
+      <p>Sampled 68 Mozambican sites across government, banking, education and commerce plus 40 international sites for comparison, scored six headers correct / weak / missing, and tested category differences with chi-square. Mozambican sites averaged 38.2 against 52.7 internationally; 68.2% were missing two or more headers. 42 of the 68 never completed a handshake — reported as a result, not dropped from the sample — which made reachability the finding, not configuration drift.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technical</h2>
+    <p><strong>Languages:</strong> Python, TypeScript, Rust, shell, SQL.</p>
+    <p><strong>Detection and telemetry:</strong> journald, auditd, MITRE ATT&amp;CK, detection-as-code, precision and recall measurement, rule tuning.</p>
+    <p><strong>Security data:</strong> VirusTotal, AbuseIPDB, GreyNoise, URLhaus, RIPEStat, IOC enrichment and triage.</p>
+    <p><strong>Engineering:</strong> scikit-learn, SQLite, httpx, React, Vite, GitHub Actions, pytest and vitest, static-site publication.</p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="cv-item">
+      <h3>Research methodology coursework (RM_2026-ii)</h3>
+      <p class="meta">Universidade São Tomás de Moçambique · 2026</p>
+      <p>Sampling design, scoring rubrics, hypothesis testing, and a reproducible pipeline as the deliverable.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p><a href="mailto:chibuikeanyafulu@gmail.com">chibuikeanyafulu@gmail.com</a> · <a href="https://github.com/Flaxo49ja">github.com/Flaxo49ja</a> · Maputo, Mozambique, available remotely.</p>
+  </section>
+
+</main>
+
+</body>
+</html>
