@@ -19,6 +19,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Mozambican sites average 38.2 on security headers; the international set averages 52.7.">
 <meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -53,8 +54,7 @@
     <article class="entry">
       <p class="where">Python · 2026 · <a href="https://github.com/Flaxo49ja/nightshift" target="_blank" rel="noopener">github.com/Flaxo49ja/nightshift</a></p>
       <h3>nightshift</h3>
-      <p>Most detection practice teaches you to install a SIEM and never tells you whether your rules caught anything. This is a single-machine range: it collects journald and auditd telemetry, injects safe loopback-only techniques with the ground truth saved before anything reads it, then scores your rules against that truth.</p>
-      <figure class="shot">
+      <p>Most detection practice teaches you to install a SIEM and never tells you whether your rules caught anything. This is a single-machine range: it collects journald and auditd telemetry, injects safe loopback-only techniques with the ground truth saved before anything reads it, then scores your rules against that truth.</p>      <figure class="shot">
         <pre tabindex="0" role="region" aria-label="nightshift score output">nightshift score — provider journald
 
 TECH      VISIBILITY     INJECTED  CAUGHT  MISSED
@@ -64,10 +64,14 @@ T1105     no-telemetry          0       0       0   not scored: no telemetry
 T1548.003 observed              0       0       0   not scored: nothing observed
 
 recall     100%  (1 caught, 0 missed, 1 scored technique(s))
-precision  33%  (2 false positive(s))</pre>
-        <figcaption>Real output from one run. Techniques the collector cannot see are reported as no telemetry and kept out of the recall arithmetic, so a blind spot never reads as a miss.</figcaption>
+precision  100%  (0 false positive(s))
+
+out of scope, not counted: 2 before the injection window
+  2026-11-25T16:24:03.360592Z  transient-unit-started
+  2026-11-25T16:24:03.430574Z  transient-unit-started</pre>
+        <figcaption>Real output from one run. Techniques the collector cannot see are reported as no telemetry and kept out of the recall arithmetic, so a blind spot never reads as a miss. Scored by the previous version, the same events read <code>precision 33% (2 false positive(s))</code>.</figcaption>
       </figure>
-      <p class="takeaway"><span>What it taught me.</span> Perfect recall is cheap: the two false positives were <code>systemd-run</code> probes from earlier in the session that lined up with no injection at all. Precision here measures how tightly a rule is scoped in time and technique, not how clever the rule is — so the fix is window discipline, not more rules.</p>
+      <p class="takeaway"><span>What it taught me.</span> The 33% was my own measurement error, not the rules'. Two <code>systemd-run</code> probes I ran five minutes before the injection were being averaged into an experiment that never observed them. Scoping scoring to the injection window took the same events from 33% to 100% without deleting a single detection — the two still print, outside the arithmetic. Precision was measuring my bookkeeping. And the 100% recall is 1 of 1 scorable technique, which says the plumbing works — not that the rules are good. That needs more injections.</p>
     </article>
 
     <article class="entry">
@@ -95,13 +99,13 @@ precision  33%  (2 false positive(s))</pre>
     <article class="entry">
       <p class="where">Python · 2026 · <a href="https://github.com/Flaxo49ja/ioc-triage" target="_blank" rel="noopener">github.com/Flaxo49ja/ioc-triage</a></p>
       <h3>ioc-triage</h3>
-      <p>Checking one indicator across five tabs is slow, and the reasoning is usually gone by the time the ticket gets written. Queries five free sources at once, returns one weighted verdict, with exit codes you can script and a 24-hour SQLite cache that keeps the free tiers alive.</p>
+      <p>A CLI that queries five free indicator sources at once, caches for 24 hours, and returns one weighted verdict with exit codes you can script.</p>
     </article>
 
     <article class="entry">
       <p class="where">HTML · 2026 · <a href="https://github.com/Flaxo49ja/secbasics" target="_blank" rel="noopener">github.com/Flaxo49ja/secbasics</a></p>
       <h3>secbasics</h3>
-      <p>Most security writing assumes the reader already works in security. Plain-language guides on home labs, VPNs, everyday tools and privacy, written for people who have never opened a terminal. A static site, in Portuguese, without jargon.</p>
+      <p>Plain-language security guides in Portuguese, for readers who have never opened a terminal: home labs, VPNs, everyday tools, privacy.</p>
     </article>
   </section>
 
@@ -111,7 +115,7 @@ precision  33%  (2 false positive(s))</pre>
 
     <figure class="figure">
       <table>
-        <caption>Header score, six headers scored correct / weak / missing. 68 Mozambican sites sampled, 40 international ones for comparison; 42 of the 68 never completed a handshake, so 66 sites were scored.</caption>
+        <caption>Header score, six headers scored correct / weak / missing. 68 Mozambican sites sampled, 40 international ones for comparison; 42 of the 68 failed to complete a handshake from my vantage point, so 66 sites were scored.</caption>
         <thead>
           <tr>
             <th scope="col">Group</th>
@@ -127,7 +131,7 @@ precision  33%  (2 false positive(s))</pre>
       <figcaption>68.2% of sites were missing two or more of the six headers. Unreachable hosts are recorded as a result, not dropped from the sample — a site that cannot answer cannot be scored, and it was being left out of the conversation entirely.</figcaption>
     </figure>
 
-    <p class="takeaway"><span>What it taught me.</span> The headline was reachability, not configuration: 42 of 68 Mozambican sites never completed a handshake at all — dead DNS, expired certificates, timeouts. Header hygiene is a second-order problem if the site does not answer.</p>
+    <p class="takeaway"><span>What it taught me.</span> The headline was reachability, not configuration: 42 of 68 Mozambican sites failed to complete a handshake from my vantage point — dead DNS, expired certificates, timeouts. From a second network that count could well be lower, which is why it is phrased as a vantage point and not as the state of the sites. Header hygiene is a second-order problem if the site does not answer.</p>
     <p>The study is written up as <em>Automated analysis of HTTP security header implementation across Mozambican and global websites</em>, and the scanner is public so it can be pointed at another country. <a href="https://github.com/Flaxo49ja/header-study" target="_blank" rel="noopener">github.com/Flaxo49ja/header-study</a></p>
   </section>
 
