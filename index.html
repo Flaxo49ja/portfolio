@@ -75,7 +75,7 @@ precision  33%  (2 false positive(s))</pre>
       <h3>PhishGuard</h3>
       <p>Every other phishing checker uploads the URL you are about to trust to somebody else's server before judging it. This one is logistic regression over 18 features of the URL string, trained on 107,355 URLs, exported to a 2 KB file and run inside the page — no request leaves the browser.</p>
       <figure class="shot">
-        <img src="shots/phishguard.png" width="947" height="775" loading="lazy" alt="PhishGuard scoring a lookalike Microsoft login URL at 77% phishing, with a bar for each feature showing how much it pushed the verdict.">
+        <img src="shots/phishguard.png" width="947" height="775" decoding="async" alt="PhishGuard scoring a lookalike Microsoft login URL at 77% phishing, with a bar for each feature showing how much it pushed the verdict.">
         <figcaption>A lookalike login URL at 77% phishing, with the occlusion explanation for each feature. The model file is 2 KB and scores in the page.</figcaption>
       </figure>
       <p class="takeaway"><span>What it taught me.</span> ROC-AUC 0.954 is easy to quote and says nothing about the URLs that matter here: the training set is global and English-heavy, so Portuguese-language lures and Mozambican brand names are exactly the case it has seen least.</p>
@@ -86,7 +86,7 @@ precision  33%  (2 false positive(s))</pre>
       <h3>mz-threat-feed</h3>
       <p>Threat feeds list indicators and never say which of them sit on address space registered to your own region. This pipeline checks recent IOCs against SADC prefixes verified in RIPEStat, triages regional security news for small IT teams, and publishes both from GitHub Actions every day.</p>
       <figure class="shot">
-        <img src="shots/mz-threat-feed.png" width="1440" height="790" loading="lazy" alt="The MZ Threat Feed dashboard front page: 5,400 indicators checked, 4,055 prefixes watched, 103 overlaps found, 18 of 75 news items kept.">
+        <img src="shots/mz-threat-feed.png" width="1440" height="790" decoding="async" alt="The MZ Threat Feed dashboard front page: 5,400 indicators checked, 4,055 prefixes watched, 103 overlaps found, 18 of 75 news items kept.">
         <figcaption>One pipeline run, rendered from the JSON in the repository rather than typed by hand.</figcaption>
       </figure>
       <p class="takeaway"><span>What it taught me.</span> Region is the missing column: 103 of 5,400 indicators resolved into SADC space, and no feed marks that — you only find out if you resolve the prefixes yourself.</p>
