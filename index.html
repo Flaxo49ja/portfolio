@@ -57,21 +57,24 @@
       <p>Most detection practice teaches you to install a SIEM and never tells you whether your rules caught anything. This is a single-machine range: it collects journald and auditd telemetry, injects safe loopback-only techniques with the ground truth saved before anything reads it, then scores your rules against that truth.</p>      <figure class="shot">
         <pre tabindex="0" role="region" aria-label="nightshift score output">nightshift score — provider journald
 
-TECH      VISIBILITY     INJECTED  CAUGHT  MISSED
-T1046     no-telemetry          0       0       0   not scored: no telemetry
-T1053.006 observed              1       1       0
-T1105     no-telemetry          0       0       0   not scored: no telemetry
-T1548.003 observed              0       0       0   not scored: nothing observed
+TECH      VISIBILITY     INJECTED  CAUGHT  MISSED     MTTD  EVIDENCE
+T1046     no-telemetry          0       0       0        —         —   not scored: no telemetry
+T1053.006 observed              2       2       0     7.2s      1.5s
+T1105     no-telemetry          0       0       0        —         —   not scored: no telemetry
+T1548.003 observed              0       0       0        —         —   not scored: nothing observed
+(only detections from a variant's designated rule count; the rest are repeats)
+T1053.006 variants: transient 1/1 (transient-unit-started), unit-file 1/1 (timer-unit-introduced)
 
-recall     100%  (1 caught, 0 missed, 1 scored technique(s))
+recall     100%  (2 caught, 0 missed, 1 scored technique(s))
 precision  100%  (0 false positive(s))
+no telemetry, not a miss: T1046 (no-telemetry), T1105 (no-telemetry)
+ran but recorded nothing (simulation limit, not a detection miss): T1548.003
 
-out of scope, not counted: 2 before the injection window
-  2026-11-25T16:24:03.360592Z  transient-unit-started
-  2026-11-25T16:24:03.430574Z  transient-unit-started</pre>
-        <figcaption>Real output from one run. Techniques the collector cannot see are reported as no telemetry and kept out of the recall arithmetic, so a blind spot never reads as a miss. Scored by the previous version, the same events read <code>precision 33% (2 false positive(s))</code>.</figcaption>
+out of scope, not counted: 65 before the injection window; 1 same technique already caught in the window
+  (each listed with timestamp and rule; trimmed here)</pre>
+        <figcaption>Real output from one run. Each variant is credited only to its designated rule; techniques the collector cannot see are reported as no telemetry and kept out of the recall arithmetic, so a blind spot never reads as a miss. MTTD is injection start to the scan that caught it, including collect and scan.</figcaption>
       </figure>
-      <p class="takeaway"><span>What it taught me.</span> The 33% was my own measurement error, not the rules'. Two <code>systemd-run</code> probes I ran five minutes before the injection were being averaged into an experiment that never observed them. Scoping scoring to the injection window took the same events from 33% to 100% without deleting a single detection — the two still print, outside the arithmetic. Precision was measuring my bookkeeping. And the 100% recall is 1 of 1 scorable technique, which says the plumbing works — not that the rules are good. That needs more injections.</p>
+      <p class="takeaway"><span>What it taught me.</span> The previous version scored the same events as <code>precision 33% (2 false positive(s))</code>. The 33% was my own measurement error, not the rules': two <code>systemd-run</code> probes I ran five minutes before the injection were being averaged into an experiment that never observed them. Scoping scoring to the injection window took the same events to 100% without deleting a single detection — the two still print, outside the arithmetic. Precision was measuring my bookkeeping. And the 100% recall is 2 of 2 injection variants across 1 technique, which says the plumbing works — not that the rules are good. That needs more injections.</p>
     </article>
 
     <article class="entry">
